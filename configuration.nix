@@ -106,29 +106,38 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget
-    vim
-    gitFull
-    firefox
 
     aspellDicts.de
     aspellDicts.en
 
-    jetbrains.pycharm-community
-    sublime3
     tor
     spotify
     vlc
     signal-desktop
+    mattermost-desktop
+    firefox
 
+    jetbrains.pycharm-community
+    sublime3
     netbeans
     android-studio
     adb-sync
     adbfs-rootless
 
-    (python3.withPackages(ps: with ps; [ ipython numpy toolz jupyter pygame yapf pandas ]))
+    (python3.withPackages(ps: with ps; [
+      ipython
+      numpy
+      toolz
+      jupyter
+      pygame
+      yapf
+      pandas
+    ]))
 
-
+    # CLI stuff
+    wget
+    myVim
+    gitFull
     fzf
     htop
     duc
