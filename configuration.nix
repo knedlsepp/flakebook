@@ -34,6 +34,76 @@
   time.timeZone = "Europe/Vienna";
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+    (self: super: {
+      myVim = super.vim_configurable.customize {
+        name = "vi"; # The name is used as a binary!
+        vimrcConfig = {
+          customRC = ''
+            set encoding=utf-8
+            au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+            au BufNewFile,BufRead,BufReadPost *.f90 set syntax=fortran
+            au VimEnter * if &diff | execute 'windo set wrap' | endif
+
+            filetype plugin indent on
+
+            set backspace=2 " make backspace work like most other program
+            set bg=dark
+            set tabstop=4
+            set shiftwidth=4
+            set expandtab
+            set wildmenu
+
+            set autoindent
+            set cindent
+
+            let g:ycm_python_binary_path = 'python'
+            let g:ycm_autoclose_preview_window_after_insertion = 1
+
+            inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+            let g:ycm_key_list_select_completion = ['<TAB>']
+            let g:ycm_key_list_previous_completion = ['<S-TAB>']
+            let g:ycm_key_list_stop_completion = ['<C-y>']
+
+            let g:ycm_semantic_triggers = {
+            \   'python': [ 're!\w{2}' ]
+            \ }
+
+            let g:gitgutter_enabled = 1
+
+            colorscheme gruvbox
+            " Show whitespace
+            highlight ExtraWhitespace ctermbg=red guibg=red
+            match ExtraWhitespace /\s\+$/
+            autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+            autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+            autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+            autocmd BufWinLeave * call clearmatches()
+
+            " Keep visual mode active
+            vnoremap < <gv
+            vnoremap > >gv
+          '';
+          packages.myVimPackage = with super.vimPlugins; {
+            start = [
+              youcompleteme
+              ctrlp
+              vim-airline
+              vim-airline-themes
+              fugitive
+              nerdtree
+              gitgutter
+              molokai
+              vim-colorstepper # Use F6/F7 to select your favorite colorscheme
+              awesome-vim-colorschemes
+              vim-yapf
+            ];
+            opt = [  ];
+          };
+        };
+      };
+    }
+  )];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -82,6 +152,9 @@
     ];
   };
   programs.command-not-found.enable = true;
+  environment.variables = {
+    EDITOR = "vi";
+  };
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
