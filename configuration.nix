@@ -160,6 +160,18 @@
     ];
   };
   programs.command-not-found.enable = true;
+  programs.bash = {
+    enableCompletion = true;
+    shellAliases = {
+      l = "ls -rltah";
+    };
+    loginShellInit = ''
+      if command -v fzf-share >/dev/null; then
+        source "$(fzf-share)/key-bindings.bash"
+      fi
+    '';
+  };
+
   environment.variables = {
     EDITOR = "vi";
   };
