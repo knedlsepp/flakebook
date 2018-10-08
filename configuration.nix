@@ -116,6 +116,7 @@
     signal-desktop
     mattermost-desktop
     firefox
+    chromium
 
     jetbrains.pycharm-community
     sublime3
