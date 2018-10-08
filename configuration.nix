@@ -41,14 +41,16 @@
     vim
     gitFull
     firefox
+
     aspellDicts.de
     aspellDicts.en
-    jetbrains.pycharm-community
 
+    jetbrains.pycharm-community
     sublime3
     tor
     spotify
     vlc
+    signal-desktop
 
     netbeans
     android-studio
@@ -56,6 +58,7 @@
     adbfs-rootless
 
     (python3.withPackages(ps: with ps; [ ipython numpy toolz jupyter pygame yapf pandas ]))
+
 
     fzf
     htop
