@@ -60,10 +60,9 @@
             let g:ycm_python_binary_path = 'python'
             let g:ycm_autoclose_preview_window_after_insertion = 1
 
-            inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
             let g:ycm_key_list_select_completion = ['<TAB>']
             let g:ycm_key_list_previous_completion = ['<S-TAB>']
-            let g:ycm_key_list_stop_completion = ['<C-y>']
+            let g:ycm_key_list_stop_completion = ['<C-y>', '<UP>', '<DOWN>']
 
             let g:ycm_semantic_triggers = {
             \   'python': [ 're!\w{2}' ]
