@@ -78,6 +78,7 @@
       "cfhdojbkjhnklbpkdaibdccddilifddb" # adblock plus
     ];
   };
+  programs.command-not-found.enable = true;
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
