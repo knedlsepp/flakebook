@@ -41,7 +41,6 @@
     vim
     gitFull
     firefox
-    chromium
     aspellDicts.de
     aspellDicts.en
     jetbrains.pycharm-community
@@ -69,14 +68,16 @@
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
-  programs.chromium.extensions = [
-    "chlffgpmiacpedhhbkiomidkjlcfhogd" # pushbullet
-    "mbniclmhobmnbdlbpiphghaielnnpgdp" # lightshot
-    "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
-    "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
-    "cfhdojbkjhnklbpkdaibdccddilifddb" # adblock plus
-  ];
-
+  programs.chromium = {
+    enable = true;
+    homepageLocation = "https://google.at";
+    extensions = [
+      "chlffgpmiacpedhhbkiomidkjlcfhogd" # pushbullet
+      "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
+      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+      "cfhdojbkjhnklbpkdaibdccddilifddb" # adblock plus
+    ];
+  };
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
