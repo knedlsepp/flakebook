@@ -16,6 +16,7 @@
   boot.loader.timeout = 2;
   boot.plymouth.enable = true; # Not great, see: https://github.com/NixOS/nixpkgs/issues/32556
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.blacklistedKernelModules = [ "snd-hda-intel" ];
 
   networking.hostName = "flakebook"; # Define your hostname.
   networking.networkmanager.enable = true;
