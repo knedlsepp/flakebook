@@ -226,7 +226,20 @@
     initialPassword = "lena";
     extraGroups = [ "wheel" "networkmanager" ];
   };
-
+  nix = {
+    autoOptimiseStore = true;
+    buildCores = 3;
+    buildMachines = [
+      { hostName = "knedlsepp.at";
+        sshUser = "sepp";
+        sshKey = "/root/.ssh/id_rsa";
+        system = "x86_64-linux";
+        maxJobs = 2;
+        supportedFeatures = [ "kvm" ];
+        # mandatoryFeatures = [ "perf" ];
+      }
+    ];
+  };
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
