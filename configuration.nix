@@ -14,7 +14,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 2;
-  boot.plymouth.enable = true;
+  boot.plymouth.enable = true; # Not great, see: https://github.com/NixOS/nixpkgs/issues/32556
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "flakebook"; # Define your hostname.
