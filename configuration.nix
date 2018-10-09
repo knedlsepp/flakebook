@@ -104,6 +104,17 @@
           };
         };
       };
+      alsaLib = super.alsaLib.overrideAttrs(o: {
+        postInstall = let
+          speaker_patches = fetchGit {
+            url = https://git.codentium.com/StephanvanSchaik/gentoo-chromebook-skylake;
+            rev = "278f9da5b888ae32b926c04794731a2ea241d892";
+          }; in ''
+            mkdir -p $out/share/alsa/ucm/
+            cp -r ${speaker_patches}/usr/share/alsa/ucm/* $out/share/alsa/ucm/
+            ln -s $out/share/alsa/ucm/Google-Cave-1.0-Cave/ $out/share/alsa/ucm/sklnau8825max
+          '';
+      });
     }
   )];
   # List packages installed in system profile. To search, run:
@@ -197,6 +208,20 @@
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  hardware.firmware = [
+    (pkgs.stdenv.mkDerivation {
+      name = "dfw_sst.bin";
+      src = pkgs.fetchurl {
+        url = "https://git.codentium.com/StephanvanSchaik/gentoo-chromebook-skylake/raw/master/lib/firmware/dfw_sst.bin";
+        sha256="07gg24jwj3q4d9dp8k57r3a4v5rfs1mlbnj20h3lhmjc9br4cga4";
+      };
+      phases = [ "installPhase" ];
+      installPhase = ''
+        mkdir -p $out/lib/firmware/
+        cp $src $out/lib/firmware/dfw_sst.bin
+      '';
+    })
+  ];
   hardware.enableAllFirmware = true;
 
   # Enable the X11 windowing system.
