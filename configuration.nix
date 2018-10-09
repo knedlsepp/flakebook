@@ -194,6 +194,7 @@
 
   # Enable sound.
   sound.enable = true;
+  hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
   hardware.enableAllFirmware = true;
