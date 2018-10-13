@@ -142,6 +142,7 @@
     myVim
     gitFull
     fzf
+    bat
     htop
     duc
     lsof
