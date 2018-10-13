@@ -85,6 +85,11 @@
             " Keep visual mode active
             vnoremap < <gv
             vnoremap > >gv
+
+            " Remember last position
+            if has("autocmd")
+              au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+            endif
           '';
           packages.myVimPackage = with super.vimPlugins; {
             start = [
