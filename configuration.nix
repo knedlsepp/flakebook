@@ -113,36 +113,35 @@
     aspellDicts.de
     aspellDicts.en
 
-    #tor
-    #spotify
-    #vlc
-    #signal-desktop
-    #mattermost-desktop
-    #chromium
+    tor
+    spotify
+    vlc
+    signal-desktop
+    mattermost-desktop
+    chromium
 
-    #jetbrains.pycharm-community
-    #sublime3
-    #netbeans
-    #android-studio
-    #adb-sync
-    #adbfs-rootless
+    jetbrains.pycharm-community
+    sublime3
+    netbeans
+    android-studio
+    adb-sync
+    adbfs-rootless
 
-    #(python3.withPackages(ps: with ps; [
-    #  ipython
-    #  numpy
-    #  toolz
-    #  jupyter
-    #  pygame
-    #  yapf
-    #  pandas
-    #]))
+    (python3.withPackages(ps: with ps; [
+      ipython
+      numpy
+      toolz
+      jupyter
+      pygame
+      yapf
+      pandas
+    ]))
 
     # CLI stuff
     wget
     myVim
     gitFull
     fzf
-    bat
     htop
     duc
     lsof
@@ -198,20 +197,6 @@
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
-  hardware.firmware = [
-    (pkgs.stdenv.mkDerivation {
-      name = "dfw_sst.bin";
-      src = pkgs.fetchurl {
-        url = "https://git.codentium.com/StephanvanSchaik/gentoo-chromebook-skylake/raw/master/lib/firmware/dfw_sst.bin";
-        sha256="07gg24jwj3q4d9dp8k57r3a4v5rfs1mlbnj20h3lhmjc9br4cga4";
-      };
-      phases = [ "installPhase" ];
-      installPhase = ''
-        mkdir -p $out/lib/firmware/
-        cp $src $out/lib/firmware/dfw_sst.bin
-      '';
-    })
-  ];
   hardware.enableAllFirmware = true;
 
   # Enable the X11 windowing system.
@@ -256,15 +241,6 @@
       }
     ];
   };
-  fileSystems."/mnt/media" = {
-    device = "//192.168.1.222/media";
-    fsType = "cifs";
-    options = let
-      # this line prevents hanging on network split
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-    in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
-  };
-
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
