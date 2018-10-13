@@ -135,6 +135,7 @@
       pygame
       yapf
       pandas
+      redis
     ]))
 
     # CLI stuff
@@ -181,6 +182,8 @@
     EDITOR = "vi";
   };
   # List services that you want to enable:
+
+  services.redis.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
