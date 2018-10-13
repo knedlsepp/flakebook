@@ -194,7 +194,10 @@
   services.redis.enable = true;
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    forwardX11 = true;
+  };
 
   services.avahi.enable = true; # For discovering of (e.g.) airtunes speakers
   # Open ports in the firewall.
