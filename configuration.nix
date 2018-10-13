@@ -175,6 +175,7 @@
       fi
     '';
   };
+  programs.adb.enable = true;
 
   environment.variables = {
     EDITOR = "vi";
@@ -220,13 +221,13 @@
     isNormalUser = true;
     uid = 1000;
     initialPassword = "sepp";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "adbusers" ];
   };
   users.users.lena = {
     isNormalUser = true;
     uid = 1001;
     initialPassword = "lena";
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "adbusers" ];
   };
   nix = {
     autoOptimiseStore = true;
