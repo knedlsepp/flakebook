@@ -148,6 +148,8 @@
     duc
     lsof
     file
+    paprefs # pulseaudio preferences (for enabling airplay)
+    gnome3.dconf # Needed to run pulseaudio preferences
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -164,6 +166,7 @@
       "cfhdojbkjhnklbpkdaibdccddilifddb" # adblock plus
     ];
   };
+  programs.dconf.enable = true; # without this paprefs could not enable airplay: https://github.com/NixOS/nixpkgs/issues/47938
   programs.command-not-found.enable = true;
   programs.bash = {
     enableCompletion = true;
@@ -188,6 +191,7 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  services.avahi.enable = true; # For discovering of (e.g.) airtunes speakers
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -201,7 +205,7 @@
   sound.enable = true;
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull; # Airtunes support
   hardware.enableAllFirmware = true;
 
   # Enable the X11 windowing system.
