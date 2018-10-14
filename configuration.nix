@@ -178,7 +178,7 @@
     shellAliases = {
       l = "ls -rltah";
     };
-    loginShellInit = ''
+    interactiveShellInit = ''
       if command -v fzf-share >/dev/null; then
         source "$(fzf-share)/key-bindings.bash"
       fi
