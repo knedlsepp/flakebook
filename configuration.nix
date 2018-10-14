@@ -235,6 +235,10 @@
     forwardX11 = true;
   };
 
+  services.journald.extraConfig = ''
+    SystemMaxUse=300M
+  '';
+
   services.avahi.enable = true; # For discovering of (e.g.) airtunes speakers
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
