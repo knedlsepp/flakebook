@@ -134,6 +134,19 @@
   )];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  environment.etc = {
+    #TODO: This needs a systemd daemon and should become a NixOS module
+    "libinput-gestures.conf".text = ''
+      # KDE: Present Windows (current desktop)
+      gesture swipe up xdotool key ctrl+F9
+
+      # KDE: Present Windows (Window class)
+      gesture swipe down xdotool key ctrl+F8
+
+      gesture swipe left xdotool key alt+Left
+      gesture swipe right xdotool key alt+Right
+    '';
+    };
   environment.systemPackages = with pkgs; [
 
     aspellDicts.de
@@ -176,6 +189,7 @@
     file
     paprefs # pulseaudio preferences (for enabling airplay)
     gnome3.dconf # Needed to run pulseaudio preferences
+    libinput-gestures
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -258,13 +272,13 @@
     isNormalUser = true;
     uid = 1000;
     initialPassword = "sepp";
-    extraGroups = [ "wheel" "networkmanager" "adbusers" ];
+    extraGroups = [ "wheel" "networkmanager" "adbusers" "input" ];
   };
   users.users.lena = {
     isNormalUser = true;
     uid = 1001;
     initialPassword = "lena";
-    extraGroups = [ "wheel" "networkmanager" "adbusers" ];
+    extraGroups = [ "wheel" "networkmanager" "adbusers" "input" ];
   };
   security.sudo.wheelNeedsPassword = false;
   nix = {
