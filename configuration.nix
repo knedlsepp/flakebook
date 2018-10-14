@@ -33,6 +33,19 @@
     defaultLocale = "en_GB.UTF-8";
   };
 
+  fonts.fonts = with pkgs; [
+    ibm-plex
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts
+    dina-font
+    proggyfonts
+  ];
+
   # Set your time zone.
   time.timeZone = "Europe/Vienna";
 
