@@ -90,6 +90,14 @@
             if has("autocmd")
               au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
             endif
+
+            " sync default register to clipboard
+            if has('unnamedplus')
+              set clipboard=unnamedplus
+            else
+              set clipboard=unnamed
+            endif
+
           '';
           packages.myVimPackage = with super.vimPlugins; {
             start = [
