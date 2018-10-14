@@ -253,6 +253,7 @@
     initialPassword = "lena";
     extraGroups = [ "wheel" "networkmanager" "adbusers" ];
   };
+  security.sudo.wheelNeedsPassword = false;
   nix = {
     autoOptimiseStore = true;
     buildCores = 3;
