@@ -213,6 +213,7 @@
     enableCompletion = true;
     shellAliases = {
       l = "ls -rltah";
+      cat = "bat";
     };
     interactiveShellInit = ''
       if command -v fzf-share >/dev/null; then
