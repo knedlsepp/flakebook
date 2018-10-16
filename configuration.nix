@@ -204,6 +204,7 @@
       "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
       "cfhdojbkjhnklbpkdaibdccddilifddb" # adblock plus
+      "jgfnehdmbbmcahojnebecpiljbkeaele" # ORF-TVthek - Downloader
     ];
   };
   programs.dconf.enable = true; # without this paprefs could not enable airplay: https://github.com/NixOS/nixpkgs/issues/47938
