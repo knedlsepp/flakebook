@@ -287,6 +287,8 @@
   nix = {
     autoOptimiseStore = true;
     buildCores = 3;
+    daemonIONiceLevel = 2;
+    daemonNiceLevel = 2;
     buildMachines = [
       { hostName = "knedlsepp.at";
         sshUser = "sepp";
