@@ -190,6 +190,9 @@
     paprefs # pulseaudio preferences (for enabling airplay)
     gnome3.dconf # Needed to run pulseaudio preferences
     libinput-gestures
+
+    # Some command-line music
+    python36Packages.mps-youtube mpv
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
