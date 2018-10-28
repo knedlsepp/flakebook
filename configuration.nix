@@ -226,6 +226,20 @@
     '';
   };
   programs.adb.enable = true;
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      l = "ls -rltah";
+      cat = "bat";
+    };
+    interactiveShellInit = ''
+      if command -v fzf-share >/dev/null; then
+        source "$(fzf-share)/key-bindings.fish"
+      fi
+    '';
+  };
+  programs.zsh.enable = true;
+
 
   environment.variables = {
     EDITOR = "vi";
@@ -280,12 +294,14 @@
     isNormalUser = true;
     uid = 1000;
     initialPassword = "sepp";
+    shell = pkgs.fish;
     extraGroups = [ "wheel" "networkmanager" "adbusers" "input" ];
   };
   users.users.lena = {
     isNormalUser = true;
     uid = 1001;
     initialPassword = "lena";
+    shell = pkgs.fish;
     extraGroups = [ "wheel" "networkmanager" "adbusers" "input" ];
   };
   security.sudo.wheelNeedsPassword = false;
