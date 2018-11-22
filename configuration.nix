@@ -263,7 +263,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-    enable = true;
+    enable = false;
     forwardX11 = true;
   };
 
