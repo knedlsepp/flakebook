@@ -320,8 +320,8 @@
   nix = {
     autoOptimiseStore = true;
     buildCores = 3;
-    daemonIONiceLevel = 2;
-    daemonNiceLevel = 2;
+    daemonIONiceLevel = 5;
+    daemonNiceLevel = 5;
     buildMachines = [
       { hostName = "knedlsepp.at";
         sshUser = "sepp";
