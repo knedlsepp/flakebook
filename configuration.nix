@@ -49,7 +49,15 @@
   # Set your time zone.
   time.timeZone = "Europe/Vienna";
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    gnome3 = {
+      gnome-keyring.enable = true;
+      at-spi2-core.enable = true;
+      #gnome-user-share.enable = true;
+      gvfs.enable = true;
+      };
+  };
   nixpkgs.overlays = [
     (self: super: {
       myVim = super.vim_configurable.customize {
@@ -147,6 +155,13 @@
       gesture swipe right xdotool key alt+Right
     '';
     };
+  environment.gnome3.excludePackages = with pkgs.gnome3; [
+    epiphany
+    gnome-music
+    gnome-photos
+    totem
+    accerciser
+  ];
   environment.systemPackages = with pkgs; [
 
     aspellDicts.de
@@ -287,6 +302,7 @@
 
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.desktopManager.gnome3.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = true;
