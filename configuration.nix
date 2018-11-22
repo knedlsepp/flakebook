@@ -248,9 +248,7 @@
       cat = "bat";
     };
     interactiveShellInit = ''
-      if command -v fzf-share >/dev/null; then
-        source "$(fzf-share)/key-bindings.fish"
-      fi
+      source (fzf-share)"/key-bindings.fish"
     '';
   };
   programs.zsh.enable = true;
