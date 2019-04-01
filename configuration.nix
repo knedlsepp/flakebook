@@ -171,11 +171,9 @@
     aspellDicts.de
     aspellDicts.en
 
-    spotify
     vlc
     signal-desktop
     chromium
-    firefox
 
     jetbrains.pycharm-community
     sublime3
@@ -187,9 +185,7 @@
     (python3.withPackages(ps: with ps; [
       ipython
       numpy
-      toolz
       jupyter
-      pygame
       yapf
       pandas
     ]))
