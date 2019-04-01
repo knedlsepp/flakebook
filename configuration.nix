@@ -335,6 +335,7 @@
     patchelf
     procps-ng # watch
     rpm
+    silver-searcher
     sshfs-fuse
     strace
     tldr
@@ -412,7 +413,7 @@
 
   environment.shellAliases = {
     l = "ls -rltah";
-    search = "grep -nrw . -e \${@}";
+    search = "ag";
     cat = "bat";
     open = "xdg-open";
     stream = "mpsyt /$1";
