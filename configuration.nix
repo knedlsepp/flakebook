@@ -20,6 +20,7 @@
 
   networking.hostName = "flakebook"; # Define your hostname.
   networking.networkmanager.enable = true;
+  networking.networkmanager.insertNameservers = [ "8.8.8.8" ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
