@@ -659,7 +659,7 @@
   services.xserver.libinput = {
     enable = true;
     middleEmulation = false;
-    naturalScrolling = true;
+    naturalScrolling = false;
     horizontalScrolling = false;
     tappingDragLock = false;
     scrollMethod = "twofinger";
