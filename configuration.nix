@@ -191,7 +191,6 @@
       pygame
       yapf
       pandas
-      redis
     ]))
 
     kdeApplications.gwenview
@@ -428,9 +427,8 @@
     EDITOR = "vi";
     LESS = "FrX";
   };
-  # List services that you want to enable:
 
-  services.redis.enable = true;
+  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh = {
