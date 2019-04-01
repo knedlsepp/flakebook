@@ -701,7 +701,7 @@
     extraGroups = [ "wheel" "networkmanager" "adbusers" "input" ];
   };
   virtualisation.docker = {
-    enable = true;
+    enable = false;
     autoPrune.enable = true;
   };
   security.sudo.wheelNeedsPassword = false;
