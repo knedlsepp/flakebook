@@ -433,6 +433,7 @@
     enable = false;
     forwardX11 = true;
   };
+  services.earlyoom.enable = true;
   services.openvpn.servers = {
     IMS = {
       config = ''
