@@ -328,7 +328,7 @@
     lsof
     mc
     myVim
-    nixos-unstable.any-nix-shell # TODO: Switch to stable with 19.03
+    any-nix-shell
     nix-index
     nix-prefetch-scripts
     paprefs # pulseaudio preferences (for enabling airplay)
