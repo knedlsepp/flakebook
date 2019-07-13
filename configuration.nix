@@ -4,10 +4,15 @@
 
 { config, pkgs, ... }:
 
+let
+  # For bleeding edge stuff:
+  nixos-unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./cave-audio.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -15,8 +20,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 2;
   boot.plymouth.enable = true; # Not great, see: https://github.com/NixOS/nixpkgs/issues/32556
+  # boot.kernelPackages = nixos-unstable.linuxPackages_testing;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.blacklistedKernelModules = [ "snd-hda-intel" "cros_ec_lpcs" "tpm_tis" ];
 
   networking.hostName = "flakebook"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -167,12 +172,11 @@
     accerciser
   ];
   environment.systemPackages = with pkgs; [
-
     aspellDicts.de
     aspellDicts.en
 
     vlc
-    signal-desktop
+    ## signal-desktop
     chromium
 
     jetbrains.pycharm-community
@@ -190,15 +194,16 @@
       pandas
     ]))
 
-    kdeApplications.gwenview
+    ## kdeApplications.gwenview
     adobeReader
     diffoscope
-    mattermost-desktop
+    ## mattermost-desktop
     keepassx-community
     kgraphviewer
     gimp
+    meld
 
-    libreoffice
+    ## libreoffice
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
         bbenoist.Nix
@@ -229,12 +234,12 @@
           version = "9.3.0";
           sha256 = "05zwviyr1ja525ifn2a704ykl4pvqjvpppmalwy4z77bn21j2ag7";
         }
-        {
-          name = "vscode-icons";
-          publisher = "robertohuertasm";
-          version = "8.0.0";
-          sha256 = "0kccniigfy3pr5mjsfp6hyfblg41imhbiws4509li31di2s2ja2d";
-        }
+#        {
+#          name = "vscode-icons";
+#          publisher = "robertohuertasm";
+#          version = "8.0.0";
+#          sha256 = "0kccniigfy3pr5mjsfp6hyfblg41imhbiws4509li31di2s2ja2d";
+#        }
         {
           name = "vim";
           publisher = "vscodevim";
@@ -317,6 +322,7 @@
     gitFull
     gitAndTools.diff-so-fancy
     gnome3.dconf # Needed to run pulseaudio preferences
+    gnumake
     graphviz
     gitAndTools.hub
     iotop
@@ -346,7 +352,7 @@
 
     # Some command-line music
     pavucontrol # For fixing bluetooth issues
-    python36Packages.mps-youtube mpv
+    python3Packages.mps-youtube mpv
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -401,7 +407,7 @@
   environment.interactiveShellInit = ''
     function mount_server(){
       mkdir -p ~/mnt/$1
-      sshfs -o reconnect,transform_symlinks $(whoami)@$1:/ ~/mnt/$1
+      sshfs -o reconnect,transform_symlinks $1:/ ~/mnt/$1
     }
     function unmount_server(){
       fusermount -u ~/mnt/$1
@@ -645,21 +651,7 @@
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull; # Airtunes support
-  hardware.firmware = [
-    (pkgs.stdenv.mkDerivation {
-      name = "dfw_sst.bin";
-      src = pkgs.fetchurl {
-        url = "https://git.codentium.com/StephanvanSchaik/gentoo-chromebook-skylake/raw/master/lib/firmware/dfw_sst.bin";
-        sha256="07gg24jwj3q4d9dp8k57r3a4v5rfs1mlbnj20h3lhmjc9br4cga4";
-      };
-      phases = [ "installPhase" ];
-      installPhase = ''
-        mkdir -p $out/lib/firmware/
-        cp $src $out/lib/firmware/dfw_sst.bin
-      '';
-    })
-  ];
-
+ 
   hardware.enableAllFirmware = true;
   hardware.cpu.intel.updateMicrocode = true;
   hardware.sensor.iio.enable = true;
@@ -682,7 +674,7 @@
 
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.desktopManager.gnome3.enable = true;
+  ## services.xserver.desktopManager.gnome3.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = true;
@@ -716,7 +708,7 @@
         sshUser = "sepp";
         sshKey = "/root/.ssh/id_rsa";
         system = "x86_64-linux";
-        maxJobs = 2;
+        maxJobs = 1;
         supportedFeatures = [ "kvm" "cuda" ];
         # mandatoryFeatures = [ "perf" ];
       }
@@ -727,37 +719,5 @@
   # servers. You should change this only after NixOS release notes say you
   # should.
   system.stateVersion = "18.09"; # Did you read the comment?
-  system.replaceRuntimeDependencies = let
-    sklnau8825adi_conf = pkgs.fetchurl {
-      url = "https://git.codentium.com/StephanvanSchaik/gentoo-chromebook-skylake/raw/278f9da5b888ae32b926c04794731a2ea241d892/usr/share/alsa/ucm/Google-Cave-1.0-Cave/sklnau8825max.conf";
-      sha256 = "1jvszv7c9qdrqzyh4wlq3zhxrvaisynl908zp9k133jhfpb5hf5l";
-      postFetch = ''
-
-      '';
-    };
-    sklnau8825adi_HiFi_conf = pkgs.fetchurl {
-      url = "https://gist.githubusercontent.com/nebulakl/2cd59ac53de8ab522da2c4de154af280/raw/5908b447a0334092ca958b97d1b4f05e36e7641e/HiFi.conf";
-      sha256 = "03vzlcldgmbp2cng1x2zgjbxhk2lg8a3sd4j8km8a1pvnkkhy4fw";
-      # url = "https://git.codentium.com/StephanvanSchaik/gentoo-chromebook-skylake/raw/278f9da5b888ae32b926c04794731a2ea241d892/usr/share/alsa/ucm/Google-Cave-1.0-Cave/HiFi.conf";
-      # sha256 = "1my4nl7h6pxhiapq2k89i1bysihh3bazi2i3y5f5waxfmq8h7hsv";
-      # url = "https://raw.githubusercontent.com/GalliumOS/galliumos-skylake/master/usr/share/alsa/ucm/sklnau8825adi/HiFi.conf";
-      # sha256 = "175d14w5xwvjfag4gi7zms7af7ml6wx37qvrlcsnrblkgvdb1df5";
-      postFetch = ''
-
-      '';
-    };
-  in [{
-    original = pkgs.alsaLib;
-    replacement = pkgs.alsaLib.overrideAttrs (super: {
-      postFixup = ''
-        mkdir -p $out/share/alsa/ucm/sklnau8825max/
-        cp -r ${sklnau8825adi_conf} $out/share/alsa/ucm/sklnau8825max/sklnau8825max.conf
-        cp -r ${sklnau8825adi_HiFi_conf} $out/share/alsa/ucm/sklnau8825max/HiFi.conf
-        sed -i 's/adi/max/g' $out/share/alsa/ucm/sklnau8825max/HiFi.conf
-        ln -s $out/share/alsa/ucm/sklnau8825max/ $out/share/alsa/ucm/Google-Cave-1.0-Cave
-        ln -s $out/share/alsa/ucm/sklnau8825max/sklnau8825max.conf $out/share/alsa/ucm/sklnau8825max/Google-Cave-1.0-Cave.conf
-      '';
-    });
-  }];
 }
 
