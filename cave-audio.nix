@@ -15,6 +15,19 @@ in
   boot.kernelParams = [ "acpi_backlight=vendor" ];
 
   services.acpid.enable = true;
+  services.acpid.handlers.headphonesEnabled = {
+    event = "jack/headphone HEADPHONE plug";
+    action = ''
+      ${pkgs.pulseaudioFull}/bin/pacmd set-card-profile 0 Headphone
+    '';
+  };
+  services.acpid.handlers.speakersEnabled = {
+    event = "jack/headphone HEADPHONE unplug";
+    action = ''
+      ${pkgs.pulseaudioFull}/bin/pacmd set-card-profile 0 Speaker
+    '';
+  };
+
 
   hardware.enableRedistributableFirmware = true;
   hardware.firmware = [

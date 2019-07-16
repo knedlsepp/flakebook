@@ -306,6 +306,7 @@ in
     })
 
     # CLI stuff
+    acpid
     bat
     bear
     binutils-unwrapped
@@ -523,7 +524,7 @@ in
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull; # Airtunes support
- 
+
   hardware.enableAllFirmware = true;
   hardware.cpu.intel.updateMicrocode = true;
   hardware.sensor.iio.enable = true;
