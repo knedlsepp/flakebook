@@ -78,7 +78,6 @@ in
   };
   nixpkgs.overlays = [
     (self: super: {
-      vaapiIntel = super.vaapiIntel.override { enableHybridCodec = true; };
       myVim = super.vim_configurable.customize {
         name = "vi"; # The name is used as a binary!
         vimrcConfig = {
@@ -660,19 +659,9 @@ in
   hardware.enableAllFirmware = true;
   hardware.cpu.intel.updateMicrocode = true;
   hardware.sensor.iio.enable = true;
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      vaapiIntel
-      vaapiVdpau
-      libvdpau-va-gl
-      intel-media-driver
-    ];
-  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "intel" "ati" "cirrus" "vesa" "vmware" "modesetting" ];
   services.xserver.layout = "us,de";
   services.xserver.xkbOptions = "eurosign:e";
 
