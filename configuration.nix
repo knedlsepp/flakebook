@@ -26,6 +26,11 @@ in
   # boot.kernelPackages = nixos-unstable.linuxPackages_testing;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.extraModprobeConfig = ''
+    options snd_hda_intel power_save_controller=N
+    options snd_hda_intel power_save=0
+  '';
+
   networking.hostName = "flakebook"; # Define your hostname.
   networking.networkmanager.enable = true;
   networking.networkmanager.insertNameservers = [ "8.8.8.8" ];
