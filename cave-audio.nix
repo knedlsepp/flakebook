@@ -18,13 +18,13 @@ in
   services.acpid.handlers.headphonesEnabled = {
     event = "jack/headphone HEADPHONE plug";
     action = ''
-      ${pkgs.pulseaudioFull}/bin/pacmd set-card-profile 0 Headphone
+      ${pkgs.alsaUtils}/bin/alsaucm -c sklnau8825max set _verb Headphone
     '';
   };
   services.acpid.handlers.speakersEnabled = {
     event = "jack/headphone HEADPHONE unplug";
     action = ''
-      ${pkgs.pulseaudioFull}/bin/pacmd set-card-profile 0 Speaker
+      ${pkgs.alsaUtils}/bin/alsaucm -c sklnau8825max set _verb Speaker
     '';
   };
 
