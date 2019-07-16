@@ -331,6 +331,7 @@ in
     iotop
     htop
     indent
+    intel-gpu-tools
     jq
     libinput-gestures
     lldb
