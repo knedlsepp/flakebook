@@ -343,6 +343,7 @@ in
     nix-prefetch-scripts
     paprefs # pulseaudio preferences (for enabling airplay)
     patchelf
+    pciutils
     procps-ng # watch
     rpm
     silver-searcher
