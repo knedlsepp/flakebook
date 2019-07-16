@@ -16,10 +16,13 @@ in
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 2;
-  boot.plymouth.enable = true; # Not great, see: https://github.com/NixOS/nixpkgs/issues/32556
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.timeout = 2;
+  # boot.plymouth.enable = true; # Not great, see: https://github.com/NixOS/nixpkgs/issues/32556
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.device = "/dev/mmcblk0"; # or "nodev" for efi only
   # boot.kernelPackages = nixos-unstable.linuxPackages_testing;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
