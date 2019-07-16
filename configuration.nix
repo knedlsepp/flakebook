@@ -533,6 +533,12 @@ in
   services.xserver.layout = "us,de";
   services.xserver.xkbOptions = "eurosign:e";
 
+  services.xserver.videoDrivers = [ "intel" ];
+  services.xserver.deviceSection = ''
+    # Remove video tearing
+      Option "DRI" "2"
+      Option "TearFree" "true"
+  '';
   # Enable touchpad support.
   services.xserver.libinput = {
     enable = true;
