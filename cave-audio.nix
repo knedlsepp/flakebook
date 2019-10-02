@@ -34,6 +34,11 @@ in
     (pkgs.runCommandNoCC "firmware-audio-CAVE" {} ''
       mkdir -p $out/lib/firmware
       cp ${crosAudioTopology} $out/lib/firmware/9d70-CORE-COREBOOT-0-tplg.bin
+      cp ${crosAudioTopology} $out/lib/firmware/dfw_sst.bin
+    '')
+    (pkgs.runCommandNoCC "firmware-audio-CAVE" {} ''
+      mkdir -p $out/lib/firmware/intel/
+      ln -s ${pkgs.firmwareLinuxNonfree}/lib/firmware/intel/dsp_fw_release_v969.bin $out/lib/firmware/intel/dsp_fw_release.bin
     '')
   ];
   boot.kernelModules = [ "skl_n88l25_m98357a" "snd_soc_skl" ];
@@ -49,15 +54,16 @@ in
         '';
       });
     }
-    {
-      original = pkgs.firmwareLinuxNonfree;
-      replacement = pkgs.firmwareLinuxNonfree.overrideAttrs (super: {
-        postInstall = ''
-          cd $out/lib/firmware/intel/
-          rm dsp_fw_release.bin
-          ln -s dsp_fw_release_v969.bin dsp_fw_release.bin
-        '';
-      });
-    }
+    # {
+    #   original = pkgs.firmwareLinuxNonfree;
+    #   replacement = pkgs.firmwareLinuxNonfree.overrideAttrs (super: {
+    #     postInstall = ''
+    #       cd $out/lib/firmware/intel/
+    #       rm dsp_fw_release.bin
+    #       ln -s dsp_fw_release_v969.bin dsp_fw_release.bin
+    #     '';
+    #   });
+    # }
   ];
 }
+
