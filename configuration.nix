@@ -518,7 +518,7 @@ in
 
   hardware.enableAllFirmware = true;
   hardware.cpu.intel.updateMicrocode = true;
-  hardware.sensor.iio.enable = true;
+  hardware.sensor.iio.enable = false; # The ACCEL_MOUNT_MATRIX doesn't work yet (modalias wrong?)
   services.udev.extraHwdb = ''
     sensor:modalias:platform:cros-ec-accel:dmi:*:svnGOOGLE*
      ACCEL_MOUNT_MATRIX=-1, 0, 0; 0, -1, 0; 0, 0, -1
