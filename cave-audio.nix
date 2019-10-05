@@ -15,16 +15,23 @@ in
   boot.kernelParams = [ "acpi_backlight=vendor" ];
 
   services.acpid.enable = true;
+  services.acpid.logEvents = true;
+  # TODO: Need to run this as the right user. getXuser?
+  # Maybe: https://gist.github.com/ef4/2075048
+  # Or; https://wiki.archlinux.org/index.php/PulseAudio/Examples
   services.acpid.handlers.headphonesEnabled = {
     event = "jack/headphone HEADPHONE plug";
     action = ''
-      ${pkgs.alsaUtils}/bin/alsaucm -c sklnau8825max set _verb Headphone
+      # probably needs root
+      USER_NAME=$(${pkgs.coreutils}/bin/who | ${pkgs.gawk}/bin/awk -v vt=tty$(fgconsole) '$0 ~ vt {print $1}')
+      sudo -u "$USER_NAME" ${pkgs.pulseaudioFull}/bin/pacmd set-card-profile alsa_card.platform-skl_n88l25_m98357a Headphone
     '';
   };
   services.acpid.handlers.speakersEnabled = {
     event = "jack/headphone HEADPHONE unplug";
     action = ''
-      ${pkgs.alsaUtils}/bin/alsaucm -c sklnau8825max set _verb Speaker
+      USER_NAME=$(${pkgs.coreutils}/bin/who | ${pkgs.gawk}/bin/awk -v vt=tty$(fgconsole) '$0 ~ vt {print $1}')
+      sudo -u "$USER_NAME" ${pkgs.pulseaudioFull}/bin/pacmd set-card-profile alsa_card.platform-skl_n88l25_m98357a Speaker
     '';
   };
 

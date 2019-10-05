@@ -23,11 +23,6 @@ in
   # boot.kernelPackages = nixos-unstable.linuxPackages_testing;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.extraModprobeConfig = ''
-    options snd_hda_intel power_save_controller=N
-    options snd_hda_intel power_save=0
-  '';
-
   networking.hostName = "flakebook"; # Define your hostname.
   networking.networkmanager.enable = true;
   networking.networkmanager.insertNameservers = [ "8.8.8.8" ];
@@ -213,7 +208,7 @@ in
       vscodeExtensions = with vscode-extensions; [
         bbenoist.Nix
         ms-vscode.cpptools
-        ms-python.python
+        #ms-python.python
       ] ++ vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "cmake-format";
@@ -392,7 +387,7 @@ in
       enable = true;
       customPkgs = [];
       theme = "fishy";
-      plugins = [ "git" "powerline" "tmux" "z" "docker" "colored-man-pages" ];
+      plugins = [ "git" "tmux" "z" "docker" "colored-man-pages" ];
     };
     interactiveShellInit = ''
       source "$(fzf-share)/key-bindings.zsh"
@@ -479,7 +474,6 @@ in
         direnv
         docker
         docker-tramp
-        elpy
         flycheck
         helm
         helm-projectile
@@ -525,16 +519,26 @@ in
   hardware.enableAllFirmware = true;
   hardware.cpu.intel.updateMicrocode = true;
   hardware.sensor.iio.enable = true;
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "us,de";
   services.xserver.xkbOptions = "eurosign:e";
 
-  services.xserver.videoDrivers = [ "intel" ];
+  services.xserver.videoDrivers = [ "intel" "modesetting" ];
   services.xserver.deviceSection = ''
     # Remove video tearing
-      Option "DRI" "2"
+      Option "DRI" "3"
       Option "TearFree" "true"
   '';
   # Enable touchpad support.
@@ -548,6 +552,7 @@ in
     clickMethod = "clickfinger";
   };
 
+  services.xserver.useGlamor = true;
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
   ## services.xserver.desktopManager.gnome3.enable = true;
@@ -575,7 +580,7 @@ in
   };
   security.sudo.wheelNeedsPassword = false;
   nix = {
-    autoOptimiseStore = true;
+    autoOptimiseStore = false;
     buildCores = 3;
     daemonIONiceLevel = 5;
     daemonNiceLevel = 5;
