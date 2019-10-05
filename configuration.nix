@@ -519,6 +519,11 @@ in
   hardware.enableAllFirmware = true;
   hardware.cpu.intel.updateMicrocode = true;
   hardware.sensor.iio.enable = true;
+  services.udev.extraHwdb = ''
+    sensor:modalias:platform:cros-ec-accel:dmi:*:svnGOOGLE*
+     ACCEL_MOUNT_MATRIX=-1, 0, 0; 0, -1, 0; 0, 0, -1
+  '';
+
   hardware.opengl = {
     enable = true;
     driSupport = true;
