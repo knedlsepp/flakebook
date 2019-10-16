@@ -586,7 +586,7 @@ in
   security.sudo.wheelNeedsPassword = false;
   nix = {
     autoOptimiseStore = false;
-    buildCores = 3;
+    buildCores = 2;
     daemonIONiceLevel = 5;
     daemonNiceLevel = 5;
     buildMachines = [
