@@ -16,23 +16,31 @@ in
 
   services.acpid.enable = true;
   services.acpid.logEvents = true;
-  # TODO: Need to run this as the right user. getXuser?
-  # Maybe: https://gist.github.com/ef4/2075048
-  # Or; https://wiki.archlinux.org/index.php/PulseAudio/Examples
-  services.acpid.handlers.headphonesEnabled = {
-    event = "jack/headphone HEADPHONE plug";
-    action = ''
-      # probably needs root
-      USER_NAME=$(${pkgs.coreutils}/bin/who | ${pkgs.gawk}/bin/awk -v vt=tty$(fgconsole) '$0 ~ vt {print $1}')
-      sudo -u "$USER_NAME" ${pkgs.pulseaudioFull}/bin/pacmd set-card-profile alsa_card.platform-skl_n88l25_m98357a Headphone
+  services.acpid.handlers = let
+    pactlCMD = ''
+      function pactl_set_card_profile() {
+        pid=$(${pkgs.procps}/bin/pidof pulseaudio)
+        user=$(${pkgs.coreutils}/bin/stat -c '%U' /proc/"$pid")
+        uid=$(${pkgs.coreutils}/bin/stat -c '%u' /proc/"$pid")
+        export PULSE_RUNTIME_PATH="/run/user/$uid/pulse"
+        ${pkgs.shadow.su}/bin/su --preserve-environment -c "${pkgs.pulseaudioFull}/bin/pactl set-card-profile 0 $1" "$user"
+      }
     '';
-  };
-  services.acpid.handlers.speakersEnabled = {
-    event = "jack/headphone HEADPHONE unplug";
-    action = ''
-      USER_NAME=$(${pkgs.coreutils}/bin/who | ${pkgs.gawk}/bin/awk -v vt=tty$(fgconsole) '$0 ~ vt {print $1}')
-      sudo -u "$USER_NAME" ${pkgs.pulseaudioFull}/bin/pacmd set-card-profile alsa_card.platform-skl_n88l25_m98357a Speaker
-    '';
+  in {
+    headphonesEnabled = {
+      event = "jack/headphone HEADPHONE plug";
+      action = ''
+        ${pactlCMD}
+        pactl_set_card_profile Headphone
+      '';
+    };
+    speakersEnabled = {
+      event = "jack/headphone HEADPHONE unplug";
+      action = ''
+        ${pactlCMD}
+        pactl_set_card_profile Speaker
+      '';
+    };
   };
 
 
