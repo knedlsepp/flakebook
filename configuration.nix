@@ -332,11 +332,13 @@ in
     any-nix-shell
     nix-index
     nix-prefetch-scripts
+    nix-review
     paprefs # pulseaudio preferences (for enabling airplay)
     patchelf
     pciutils
     procps-ng # watch
     rpm
+    shellcheck
     silver-searcher
     sshfs-fuse
     strace
@@ -345,6 +347,7 @@ in
     tree
     valgrind
     wget
+    xclip
 
     # Some command-line music
     pavucontrol # For fixing bluetooth issues
