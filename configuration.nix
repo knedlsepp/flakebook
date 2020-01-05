@@ -358,6 +358,7 @@ in
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+  programs.adb.enable = true;
   programs.chromium = {
     enable = true;
     homepageLocation = "https://google.at";
