@@ -195,7 +195,6 @@ in
     ]))
 
     ## kdeApplications.gwenview
-    adobeReader
     diffoscope
     ## mattermost-desktop
     keepassx-community
