@@ -582,6 +582,8 @@ in
     shell = pkgs.zsh;
     extraGroups = [ "wheel" "networkmanager" "adbusers" "input" ];
   };
+  boot.kernelModules = [ "kvm-intel" ];
+  virtualisation.libvirtd.enable = true;
   virtualisation.docker = {
     enable = false;
     autoPrune.enable = true;
