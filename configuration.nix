@@ -584,6 +584,7 @@ in
     extraGroups = [ "wheel" "networkmanager" "adbusers" "input" ];
   };
   boot.kernelModules = [ "kvm-intel" ];
+  boot.supportedFilesystems = [ "ntfs" ];
   virtualisation.libvirtd.enable = true;
   virtualisation.docker = {
     enable = false;
