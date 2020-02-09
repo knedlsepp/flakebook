@@ -67,6 +67,7 @@ in
       #gnome-user-share.enable = true;
       gvfs.enable = true;
     };
+    chromium.enableWideVine = true;
   };
   nixpkgs.overlays = [
     (self: super: {
