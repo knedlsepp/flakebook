@@ -599,10 +599,11 @@ in
   };
   security.sudo.wheelNeedsPassword = false;
   nix = {
-    autoOptimiseStore = false;
+    autoOptimiseStore = true;
     buildCores = 2;
     daemonIONiceLevel = 5;
     daemonNiceLevel = 5;
+    trustedUsers = [ "sepp" ];
     buildMachines = [
       { hostName = "knedlsepp.at";
         sshUser = "sepp";
