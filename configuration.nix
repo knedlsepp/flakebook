@@ -203,6 +203,7 @@ in
     kgraphviewer
     gimp
     meld
+    gparted
 
     ## libreoffice
     (vscode-with-extensions.override {
