@@ -436,7 +436,7 @@ in
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-    enable = false;
+    enable = true;
     forwardX11 = true;
   };
   services.earlyoom.enable = true;
