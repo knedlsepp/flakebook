@@ -365,14 +365,12 @@ in
     enable = true;
     homepageLocation = "https://google.at";
     extensions = [
-      "chlffgpmiacpedhhbkiomidkjlcfhogd" # pushbullet
-      "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
+      "klbibkeccnjlkjkiokjodocebajanakg" # The Great Suspender
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
       "cfhdojbkjhnklbpkdaibdccddilifddb" # adblock plus
       "jgfnehdmbbmcahojnebecpiljbkeaele" # ORF-TVthek - Downloader
       "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
       "ookepigabmicjpgfnmncjiplegcacdbm" # Material Simple Dark Grey
-      "gkojfkhlekighikafcpjkiklfbnlmeio" # Hola VPN Proxy Unblocker
     ];
   };
   programs.dconf.enable = true; # without this paprefs could not enable airplay: https://github.com/NixOS/nixpkgs/issues/47938
