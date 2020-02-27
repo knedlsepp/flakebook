@@ -33,9 +33,9 @@ in
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
+  console.font = "Lat2-Terminus16";
+  console.keyMap = "us";
   i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
     defaultLocale = "en_GB.UTF-8";
   };
 
@@ -565,6 +565,7 @@ in
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
+  programs.ssh.askPassword = pkgs.lib.mkForce "${pkgs.plasma5.ksshaskpass.out}/bin/ksshaskpass";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = true;
