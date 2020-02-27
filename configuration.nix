@@ -22,6 +22,7 @@ in
   # boot.plymouth.enable = true; # Not great, see: https://github.com/NixOS/nixpkgs/issues/32556
   # boot.kernelPackages = nixos-unstable.linuxPackages_testing;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernel.sysctl = { "vm.swappiness" = 10; };
 
   networking.hostName = "flakebook"; # Define your hostname.
   networking.networkmanager.enable = true;
