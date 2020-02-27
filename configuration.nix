@@ -208,94 +208,94 @@ in
     ## libreoffice
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions; [
-        bbenoist.Nix
-        ms-vscode.cpptools
+        #bbenoist.Nix
+        #ms-vscode.cpptools
         #ms-python.python
       ] ++ vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "cmake-format";
-          publisher = "cheshirekow";
-          version = "0.4.2";
-          sha256 = "03q7ky0rb7af9ysjcvfgr5hhipaxdzkkz0ha6pjg39p30nir9qkm";
-        }
-        {
-          name = "cmake";
-          publisher = "twxs";
-          version = "0.0.17";
-          sha256 = "11hzjd0gxkq37689rrr2aszxng5l9fwpgs9nnglq3zhfa1msyn08";
-        }
-        {
-          name = "cmake-tools";
-          publisher = "vector-of-bool";
-          version = "1.1.3";
-          sha256 = "1x9ph4r742dxj0hv6269ngm7w4h0n558cvxcz9n3cg79wpd7j5i5";
-        }
-        {
-          name = "gitlens";
-          publisher = "eamodio";
-          version = "9.3.0";
-          sha256 = "05zwviyr1ja525ifn2a704ykl4pvqjvpppmalwy4z77bn21j2ag7";
-        }
-#        {
-#          name = "vscode-icons";
-#          publisher = "robertohuertasm";
-#          version = "8.0.0";
-#          sha256 = "0kccniigfy3pr5mjsfp6hyfblg41imhbiws4509li31di2s2ja2d";
-#        }
-        {
-          name = "vim";
-          publisher = "vscodevim";
-          version = "0.17.3";
-          sha256 = "0lak19bc1gwymwz0ja6dksr9ckiaikzwa78520s4fksm5ngxr678";
-        }
-        {
-          name = "githistory";
-          publisher = "donjayamanne";
-          version = "0.4.4";
-          sha256 = "18cha01n29dgysch2diyszjwpf9fpvpzpihikm1kps953d8blvnd";
-        }
-        {
-          name = "bracket-pair-colorizer";
-          publisher = "coenraads";
-          version = "1.0.61";
-          sha256 = "0r3bfp8kvhf9zpbiil7acx7zain26grk133f0r0syxqgml12i652";
-        }
-        {
-          name = "gitblame";
-          publisher = "waderyan";
-          version = "2.6.3";
-          sha256 = "08rlmb5ic22hglh6fmi2pl2p1yphjk5vpbi2hs12pxqjc57cqww9";
-        }
-        {
-          name = "clang-format";
-          publisher = "xaver";
-          version = "1.8.0";
-          sha256 = "1xncj80x82a2b34ql33rc26x8sb0vchssfa9jd7wa95jg3ivb27v";
-        }
-        {
-          name = "vscode-lldb";
-          publisher = "vadimcn";
-          version = "1.2.0";
-          sha256 = "016ragmcpa02jnxrf715xwvs1hwq559br71vfkhd9q3bbl49703b";
-        }
-        {
-          name = "debug";
-          publisher = "webfreak";
-          version = "0.22.0";
-          sha256 = "1frikakfcslwn177zdwzcc2qzvhvr7fw3whqls4hykhm577g093f";
-        }
-        {
-          name = "vscode-cudacpp";
-          publisher = "kriegalex";
-          version = "0.1.1";
-          sha256 = "00qkx97sk2savwpi0szc5hyjr3pwp1b809pcklynrcqnp5rj2zn1";
-        }
-        {
-          name = "code-runner";
-          publisher = "formulahendry";
-          version = "0.6.33";
-          sha256 = "166ia73vrcl5c9hm4q1a73qdn56m0jc7flfsk5p5q41na9f10lb0";
-        }
+        #{
+        #  name = "cmake-format";
+        #  publisher = "cheshirekow";
+        #  version = "0.4.2";
+        #  sha256 = "03q7ky0rb7af9ysjcvfgr5hhipaxdzkkz0ha6pjg39p30nir9qkm";
+        #}
+        #{
+        #  name = "cmake";
+        #  publisher = "twxs";
+        #  version = "0.0.17";
+        #  sha256 = "11hzjd0gxkq37689rrr2aszxng5l9fwpgs9nnglq3zhfa1msyn08";
+        #}
+        #{
+        #  name = "cmake-tools";
+        #  publisher = "vector-of-bool";
+        #  version = "1.1.3";
+        #  sha256 = "1x9ph4r742dxj0hv6269ngm7w4h0n558cvxcz9n3cg79wpd7j5i5";
+        #}
+        #{
+        #  name = "gitlens";
+        #  publisher = "eamodio";
+        #  version = "9.3.0";
+        #  sha256 = "05zwviyr1ja525ifn2a704ykl4pvqjvpppmalwy4z77bn21j2ag7";
+        #}
+        #{
+        #  name = "vscode-icons";
+        #  publisher = "robertohuertasm";
+        #  version = "8.0.0";
+        #  sha256 = "0kccniigfy3pr5mjsfp6hyfblg41imhbiws4509li31di2s2ja2d";
+        #}
+        #{
+        #  name = "vim";
+        #  publisher = "vscodevim";
+        #  version = "0.17.3";
+        #  sha256 = "0lak19bc1gwymwz0ja6dksr9ckiaikzwa78520s4fksm5ngxr678";
+        #}
+        #{
+        #  name = "githistory";
+        #  publisher = "donjayamanne";
+        #  version = "0.4.4";
+        #  sha256 = "18cha01n29dgysch2diyszjwpf9fpvpzpihikm1kps953d8blvnd";
+        #}
+        #{
+        #  name = "bracket-pair-colorizer";
+        #  publisher = "coenraads";
+        #  version = "1.0.61";
+        #  sha256 = "0r3bfp8kvhf9zpbiil7acx7zain26grk133f0r0syxqgml12i652";
+        #}
+        #{
+        #  name = "gitblame";
+        #  publisher = "waderyan";
+        #  version = "2.6.3";
+        #  sha256 = "08rlmb5ic22hglh6fmi2pl2p1yphjk5vpbi2hs12pxqjc57cqww9";
+        #}
+        #{
+        #  name = "clang-format";
+        #  publisher = "xaver";
+        #  version = "1.8.0";
+        #  sha256 = "1xncj80x82a2b34ql33rc26x8sb0vchssfa9jd7wa95jg3ivb27v";
+        #}
+        #{
+        #  name = "vscode-lldb";
+        #  publisher = "vadimcn";
+        #  version = "1.2.0";
+        #  sha256 = "016ragmcpa02jnxrf715xwvs1hwq559br71vfkhd9q3bbl49703b";
+        #}
+        #{
+        #  name = "debug";
+        #  publisher = "webfreak";
+        #  version = "0.22.0";
+        #  sha256 = "1frikakfcslwn177zdwzcc2qzvhvr7fw3whqls4hykhm577g093f";
+        #}
+        #{
+        #  name = "vscode-cudacpp";
+        #  publisher = "kriegalex";
+        #  version = "0.1.1";
+        #  sha256 = "00qkx97sk2savwpi0szc5hyjr3pwp1b809pcklynrcqnp5rj2zn1";
+        #}
+        #{
+        #  name = "code-runner";
+        #  publisher = "formulahendry";
+        #  version = "0.6.33";
+        #  sha256 = "166ia73vrcl5c9hm4q1a73qdn56m0jc7flfsk5p5q41na9f10lb0";
+        #}
       ];
     })
 
