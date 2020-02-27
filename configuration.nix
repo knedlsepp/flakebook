@@ -467,7 +467,7 @@ in
   };
 
   services.emacs = {
-    enable = true;
+    enable = false;
     package = let
       myEmacs = pkgs.emacs26-nox;
       emacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
