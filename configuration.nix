@@ -439,7 +439,12 @@ in
     enable = true;
     forwardX11 = true;
   };
-  services.earlyoom.enable = true;
+  services.earlyoom = {
+    enable = true;
+    enableDebugInfo = true;
+    freeSwapThreshold = 60;
+    # notificationsCommand = "sudo -u josef.kemetmueller DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus notify-send"; # TODO: Figure out BUS_ADDRESS
+  };
   services.openvpn.servers = {
     IMS = {
       config = ''
