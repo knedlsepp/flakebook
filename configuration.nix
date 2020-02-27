@@ -522,8 +522,15 @@ in
   # Enable sound.
   sound.enable = true;
   hardware.bluetooth.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull; # Airtunes support
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull; # Airtunes support
+    tcp = {
+      enable = true;
+      anonymousClients.allowedIpRanges = [ "127.0.0.1" ];
+    };
+  };
+
 
   hardware.enableAllFirmware = true;
   hardware.cpu.intel.updateMicrocode = true;
@@ -544,6 +551,38 @@ in
       intel-media-driver
     ];
   };
+  services.mopidy = {
+    enable = false;
+
+    extensionPackages = [
+      pkgs.mopidy-moped
+      pkgs.mopidy-iris
+    ];
+
+    configuration = ''
+      [audio]
+      output = pulsesink server=127.0.0.1
+
+      [http]
+      enabled = true
+      hostname = 127.0.0.1
+      port = 6680
+
+      [mpd]
+      enabled = true
+      hostname = 127.0.0.1
+      port = 6600
+
+      [local]
+      enabled = true
+      media_dir = /tmp/audio
+
+      [file]
+      enabled = true
+      media_dirs = /tmp/audio
+    '';
+  };
+
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
